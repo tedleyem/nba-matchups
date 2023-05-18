@@ -1,0 +1,21 @@
+{
+    "name": "nba-matchups-flask",
+    "mastertemplate": "Flask driven nba teams matchup app",
+    "version": "1.0.4",
+    "description": "Flask based data driven nba matchups app",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tmeralus/nba-matchups"
+    },
+    "bugs": {
+        "url": "https://github.com/tmeralus/nba-matchups/issues",
+        "email": "tmeralus@gmail.com"
+    },
+    "author": "Tedley Meralus / Tedley Meralus",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
