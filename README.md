@@ -5,6 +5,7 @@ A Python driven web app and TwitterBot for comparing team data.
 Choose an NBA team, view their stats, and see how they matchup
 against each other.
  
+* * Python version:  python-3.8.10
 
 ### Table of Contents
 * [Demo](#demo)

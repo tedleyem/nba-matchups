@@ -1,0 +1,22 @@
+-- create roles with permissions
+CREATE ROLE viewer;
+CREATE ROLE editor;
+CREATE ROLE admin;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO viewer;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO viewer;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT,INSERT,UPDATE ON TABLES TO editor;
+
+-- create admin user 
+ALTER USER admin WITH SUPERUSER PASSWORD 'password';
+
+-- create user ted for basic user access  
+CREATE ROLE ted PASSWORD 'reverse' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN; 
+GRANT editor TO ted;
+
+-- create guest user 
+CREATE ROLE guest PASSWORD 'guest' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN; 
+GRANT viewer TO guest;
+
+-- create user roz 
+CREATE ROLE roz PASSWORD 'diamonds' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN; 
+GRANT viewer TO roz;
