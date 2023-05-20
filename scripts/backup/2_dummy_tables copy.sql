@@ -1,3 +1,13 @@
+-- create databases 
+CREATE DATABASE dummy; 
+
+-- create dummy nbateams table 
+CREATE TABLE IF NOT EXISTS dummy_teams (
+  product_id INT NOT NULL,
+  name varchar(250) NOT NULL,
+  PRIMARY KEY (product_id)
+);
+
 -- Creation of dummy_order_status table
 CREATE TABLE IF NOT EXISTS dummy_order_status (
   dummy_order_status_id varchar(200) NOT NULL,

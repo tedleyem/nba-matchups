@@ -1,5 +1,8 @@
 # Postgres commands and helpful resources 
 
+#### create user with password and permissions
+CREATE ROLE user_name PASSWORD 'PaSSwOrD' NOSUPERUSER CREATEDB CREATEROLE INHERIT LOGIN;
+
 Grant Privileges to the User
 
 By default, new users do not have any privileges except for login. To add privileges when creating a user, run the createuser client utility in the following format:

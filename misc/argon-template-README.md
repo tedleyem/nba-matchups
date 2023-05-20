@@ -166,7 +166,7 @@ Within the download you'll find the following directories and files:
    |-- docker-compose.yml                   # Deployment
    |-- gunicorn-cfg.py                      # Deployment   
    |-- nginx                                # Deployment
-   |    |-- appseed-app.conf                # Deployment 
+   |    |-- app.conf                        # Deployment 
    |
    |-- .env                                 # Inject Configuration via Environment
    |-- run.py                               # Start the app - WSGI gateway

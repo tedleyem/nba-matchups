@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    container_name: matchups_app
+    container_name: matchups
     restart: always
     env_file: .env
     build: .
@@ -20,17 +20,21 @@ services:
       - web_network
     depends_on: 
       - app
-  database:
+  db:
     container_name: postgres
     restart: always
     image: "postgres:15"
+    env_file: .env
+    logging:
+          options:
+            max-size: 10m
+            max-file: "3"
     ports:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./scripts/db/tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./scripts/db/dummy_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
-      - ./scripts/db/users.sql:/docker-entrypoint-initdb.d/create_users.sql
+      - ./scripts/1_users.sql:/docker-entrypoint-initdb.d/1_users.sql 
+      - ./scripts/2_dummy_tables.sql:/docker-entrypoint-initdb.d/3_dummy_tables.sql 
     networks:
       - web_network
     depends_on: 
