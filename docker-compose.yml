@@ -28,6 +28,9 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./scripts/db/tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./scripts/db/dummy_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./scripts/db/users.sql:/docker-entrypoint-initdb.d/create_users.sql
     networks:
       - web_network
     depends_on: 
