@@ -12,8 +12,14 @@ class Config(object):
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Set up the App keys  
-    SECRET_KEY = os.getenv('POSTGRES_USER')
-    SECRET_KEY = os.getenv('POSTGRES_PASSWORD') 
+    POSTGRES_USER = os.getenv('POSTGRES_USER')
+    POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD') 
+    DB_USERNAME = os.getenv('DB_USER')
+    DB_ENGINE = os.getenv('DB_ENGINE') 
+    DB_PASS = os.getenv('POSTGRES_PASS')
+    DB_HOST = os.getenv('POSTGRES_HOST') 
+    DB_PORT = os.getenv('POSTGRES_PORT') 
+    DB_NAME = os.getenv('POSTGRES_NAME')
 
 
 class ProductionConfig(Config):
@@ -26,13 +32,13 @@ class ProductionConfig(Config):
 
     # This will connect to the postgres db container service named 'db' 
     # postgresql+psycopg2://{db_login}:{db_password}@db:5432/postgres
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:5432/postgres'.format(
-        config('DB_ENGINE', default='postgresql'),
-        config('DB_USERNAME', default='postgres'),
-        config('DB_PASS', default='postgres'),
-        config('DB_HOST', default='localhost'),
-        config('DB_PORT', default=5432),
-        config('DB_NAME', default='postgres')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:{DB_PORT}/{DB_NAME}'.format(
+        config('DB_ENGINE', default='{DB_ENGINE}'),
+        config('DB_USERNAME', default='{DB_USERNAME}'),
+        config('DB_PASS', default='{DB_PASS}'),
+        config('DB_HOST', default='{DB_HOST}'),
+        config('DB_PORT', default='{DB_PORT}'),
+        config('DB_NAME', default='{DB_NAME}')
     )
 
 
