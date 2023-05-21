@@ -3,7 +3,7 @@ services:
   app:
     container_name: matchups
     restart: always
-    env_file: apps/.env
+    env_file: .env
     build: .
     networks:
       - db_network
@@ -24,7 +24,7 @@ services:
     container_name: postgres
     restart: always
     image: "postgres:15"
-    env_file: apps/.env
+    env_file: .env
     logging:
           options:
             max-size: 10m
