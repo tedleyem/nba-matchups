@@ -7,8 +7,14 @@ import psycopg2
 from dotenv import load_dotenv
 from decouple import config
 
+
+
 class Config(object):
-    load_dotenv() # load .env variables 
+    # load .env variables 
+    env = os.getenv('ENVIRONMENT', 'development')
+    dotenv_path = f'.env.{env}'
+    load_dotenv(dotenv_path=dotenv_path)
+
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Set up the App keys  
@@ -40,11 +46,11 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # This will connect to the postgres db container service using environment variables
-    SQLALCHEMY_DATABASE_URI = ('postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
                                          + os.environ['POSTGRES_PASSWORD']+ "@" 
                                          + os.environ['DB_HOST']+ ":"
                                          + os.environ['DB_PORT']+ "/"
-                                         + os.environ['DB_NAME']+ "'")
+                                         + os.environ['DB_NAME']+ "'"
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -54,11 +60,25 @@ class DevelopmentConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # This will connect to the postgres db container service using environment variables
-    SQLALCHEMY_DATABASE_URI = ('postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
                                          + os.environ['POSTGRES_PASSWORD']+ "@" 
                                          + os.environ['DB_HOST']+ ":"
                                          + os.environ['DB_PORT']+ "/"
-                                         + os.environ['DB_NAME']+ "'")
+                                         + os.environ['DB_NAME']+ "'"
+
+class StagingConfig(Config):
+    DEBUG = True
+    # Security
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_DURATION = 3600
+
+    # This will connect to the postgres db container service using environment variables
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
+                                         + os.environ['POSTGRES_PASSWORD']+ "@" 
+                                         + os.environ['DB_HOST']+ ":"
+                                         + os.environ['DB_PORT']+ "/"
+                                         + os.environ['DB_NAME']+ "'"
 
 class DebugConfig(Config):
     DEBUG = True
@@ -66,7 +86,8 @@ class DebugConfig(Config):
 
 # Load all possible configurations
 config_dict = {
-    'Production': ProductionConfig,
     'Development': DevelopmentConfig,
+    'Staging': DevelopmentConfig,
+    'Production': ProductionConfig,
     'Debug': DebugConfig
 }
