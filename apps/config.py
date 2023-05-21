@@ -39,16 +39,12 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
-    # This will connect to the postgres db container service named 'db' 
-    # postgresql+psycopg2://{db_login}:{db_password}@db:5432/postgres
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:{DB_PORT}/{DB_NAME}'.format(
-        config('DB_ENGINE', default='{DB_ENGINE}'),
-        config('DB_USERNAME', default='{DB_USERNAME}'),
-        config('DB_PASS', default='{DB_PASS}'),
-        config('DB_HOST', default='{DB_HOST}'),
-        config('DB_PORT', default='{DB_PORT}'),
-        config('DB_NAME', default='{DB_NAME}')
-    )
+    # This will connect to the postgres db container service using environment variables
+    SQLALCHEMY_DATABASE_URI = ('postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
+                                         + os.environ['POSTGRES_PASSWORD']+ "@" 
+                                         + os.environ['DB_HOST']+ ":"
+                                         + os.environ['DB_PORT']+ "/"
+                                         + os.environ['DB_NAME']+ "'")
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -57,16 +53,12 @@ class DevelopmentConfig(Config):
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
-    # This will connect to the postgres db container service named 'db' 
-    # postgresql+psycopg2://{db_login}:{db_password}@db:5432/postgres
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{DEV_POSTGRES_USER}:{DEV_POSTGRES_PASSWORD}@db:{DEV_DB_PORT}/{DEV_DB_NAME}'.format(
-        config('DB_ENGINE', default='{DEV_DB_ENGINE}'),
-        config('DB_USERNAME', default='{DEV_DB_USERNAME}'),
-        config('DB_PASS', default='{DEV_DB_PASS}'),
-        config('DB_HOST', default='{DEV_DB_HOST}'),
-        config('DB_PORT', default='{DEV_DB_PORT}'),
-        config('DB_NAME', default='{DEV_DB_NAME}')
-    )
+    # This will connect to the postgres db container service using environment variables
+    SQLALCHEMY_DATABASE_URI = ('postgresql+psycopg2://'+ os.environ['POSTGRES_USER'] + ":" 
+                                         + os.environ['POSTGRES_PASSWORD']+ "@" 
+                                         + os.environ['DB_HOST']+ ":"
+                                         + os.environ['DB_PORT']+ "/"
+                                         + os.environ['DB_NAME']+ "'")
 
 class DebugConfig(Config):
     DEBUG = True
