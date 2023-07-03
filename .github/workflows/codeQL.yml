@@ -1,7 +1,13 @@
 - name: Initialize CodeQL
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
   uses: github/codeql-action/init@v2
   with:
-    languages: python
+    languages: python, javascript
 
 # Here is where you build your code
 - run: |
