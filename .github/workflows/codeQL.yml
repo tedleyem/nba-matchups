@@ -1,0 +1,12 @@
+- name: Initialize CodeQL
+  uses: github/codeql-action/init@v2
+  with:
+    languages: python
+
+# Here is where you build your code
+- run: |
+    make bootstrap
+    make release
+
+- name: Perform CodeQL Analysis
+  uses: github/codeql-action/analyze@v2
