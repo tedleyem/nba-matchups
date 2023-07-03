@@ -1,38 +1,14 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v2.5.0
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+    -   id: check-added-large-files
+    -   id: pylint
 
 -   repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
-    -   id: black
-
-- repo: https://github.com/psf/black
-  rev: 19.10b0
-  hooks:
-    - id: black
-
- - repo: https://github.com/pre-commit/pre-commit-hooks
-   rev: v2.5.0
-   hooks:
-   - id: check-added-large-files
-
-- repo: local
-  hooks:
-  - id: pylint
-       name: pylint
-       entry: poetry run pylint app/
-       language: system
-       always_run: true
-       pass_filenames: false
-       
-  - id: create requirements
-    name: create requirements
-    entry: sh write_requirements.sh
-    language: system
-    always_run: true
-    pass_filenames: false
+    -   id: black  
