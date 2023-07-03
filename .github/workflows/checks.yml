@@ -35,6 +35,7 @@ jobs:
     steps:
       - name: Check out code from GitHub
         uses: actions/checkout@v3.5.3
+
       - name: Set up Python ${{ env.DEFAULT_PYTHON }}
         id: python
         uses: actions/setup-python@v4.6.1
@@ -64,11 +65,13 @@ jobs:
           . venv/bin/activate
           python -m pip install -U pip setuptools wheel
           pip install -U -r requirements.txt
+
       - name: Generate pre-commit restore key
         id: generate-pre-commit-key
         run: >-
           echo "key=pre-commit-${{ env.CACHE_VERSION }}-${{
             hashFiles('.pre-commit-config.yaml') }}" >> $GITHUB_OUTPUT
+
       - name: Restore pre-commit environment
         id: cache-precommit
         uses: actions/cache@v3.3.1
@@ -79,7 +82,7 @@ jobs:
       - name: Install pre-commit dependencies
         if: steps.cache-precommit.outputs.cache-hit != 'true'
         run: |
-          . venv/bin/activate
+          . venv/bin/activate 
           pre-commit install --install-hooks
 
   spelling:
@@ -105,6 +108,7 @@ jobs:
           key:
             ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
+
       - name: Run spelling checks
         run: |
           . venv/bin/activate
