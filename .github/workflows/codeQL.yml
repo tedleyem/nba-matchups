@@ -4,10 +4,23 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+jobs:
+  analyze:
+    permissions:
+      security-events: write
+      actions: read
 
-  uses: github/codeql-action/init@v2
-  with:
-    languages: python, javascript
+  strategy:
+    fail-fast: false
+    matrix:
+      language: ['python', 'javascript']  
+
+  steps:
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+
 
 # Here is where you build your code
 - run: |
