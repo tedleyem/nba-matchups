@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  app:
+  web:
     container_name: matchups
     restart: always
     env_file: apps/.env
@@ -19,7 +19,7 @@ services:
     networks:
       - web_network
     depends_on: 
-      - app
+      - web
   db:
     container_name: postgres
     restart: always
@@ -38,7 +38,7 @@ services:
     networks:
       - web_network
     depends_on: 
-      - app
+      - web
 networks:
   db_network:
     driver: bridge
