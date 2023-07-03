@@ -29,56 +29,9 @@ jobs:
     name: Prepare base dependencies
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    outputs:
-      python-key: ${{ steps.generate-python-key.outputs.key }}
-      pre-commit-key: ${{ steps.generate-pre-commit-key.outputs.key }}
     steps:
-      - name: Check out code from GitHub
-        uses: actions/checkout@v3.5.3
-      - name: Set up Python ${{ env.DEFAULT_PYTHON }}
-        id: python
-        uses: actions/setup-python@v4.6.1
-        with:
-          python-version: ${{ env.DEFAULT_PYTHON }}
-          check-latest: true
-      - name: Generate partial Python venv restore key
-        id: generate-python-key
-        run: >-
-          echo "key=${{ env.KEY_PREFIX }}-${{ env.CACHE_VERSION }}-${{
-            hashFiles('pyproject.toml', 'requirements_test.txt',
-          'requirements_test_min.txt', 'requirements_test_pre_commit.txt') }}" >>
-          $GITHUB_OUTPUT
-      - name: Restore Python virtual environment
-        id: cache-venv
-        uses: actions/cache@v3.3.1
-        with:
-          path: venv
-          key: >-
-            ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
-            steps.generate-python-key.outputs.key }}
-      - name: Create Python virtual environment
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv venv
-          . venv/bin/activate
-          python -m pip install -U pip setuptools wheel
-          pip install -U -r requirements.txt
-      - name: Generate pre-commit restore key
-        id: generate-pre-commit-key
-        run: >-
-          echo "key=pre-commit-${{ env.CACHE_VERSION }}-${{
-            hashFiles('.pre-commit-config.yaml') }}" >> $GITHUB_OUTPUT
-      - name: Restore pre-commit environment
-        id: cache-precommit
-        uses: actions/cache@v3.3.1
-        with:
-          path: ${{ env.PRE_COMMIT_CACHE }}
-          key: >-
-            ${{ runner.os }}-${{ steps.generate-pre-commit-key.outputs.key }}
       - name: Install pre-commit dependencies
-        if: steps.cache-precommit.outputs.cache-hit != 'true'
-        run: |
-          . venv/bin/activate
+        run: | 
           pre-commit install --install-hooks
 
   pylint:
@@ -122,12 +75,10 @@ jobs:
           pip list | grep 'astroid\|pylint'
           pre-commit run --hook-stage manual pylint-with-spelling --all-files
 
- 
   pytest:
     name: pytest 
     timeout-minutes: 10
-    runs-on: ubuntu-latest
-    strategy:
+    runs-on: ubuntu-latest 
       matrix:
         python-version: ["3.10"]
     steps:
