@@ -11,15 +11,6 @@ repos:
 -   repo: https://github.com/PyCQA/pylint
     rev: v2.17.4
     hooks:
-    - id: check-yaml
-
--   repo: https://github.com/PyCQA/doc8
-    rev: v1.1.1
-    hooks:
-    - id: doc8
-
-- repo: local
-  hooks:
     - id: pylint
       name: pylint
       entry: pylint
@@ -30,3 +21,8 @@ repos:
           "-rn", # Only display messages
           "-sn", # Don't display the score
         ]
+
+-   repo: https://github.com/PyCQA/doc8
+    rev: v1.1.1
+    hooks:
+    - id: doc8 
