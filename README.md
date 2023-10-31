@@ -1,26 +1,14 @@
-# Nba Matchups Dashboard 
+# Nba Matchups Dashboard
 ![Twitter Follow](https://img.shields.io/twitter/follow/checkballnba?style=social)
 
-A Python driven web app and TwitterBot for comparing team data. 
+A web app and TwitterBot for comparing team data.
 Choose an NBA team, view their stats, and see how they matchup
 against each other.
- 
-* * Python version:  python-3.8.10
-
-### Table of Contents
-* [Demo](#demo)
-* [Docker setup](#docker-support)  
-* [Quickstart](#quick-start)  
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Report an Issue](#reporting-issues)
-* [Credits](#credits)
 
 ### Demo
  A live demo of this page is [coming soon]()
 
 ## Docker Support
-
 > Get the code
 
 ```bash
@@ -31,137 +19,80 @@ $ cd nba-matchups
 > Start the app in Docker
 
 ```bash
-$ docker-compose pull   # download dependencies 
+$ docker-compose pull   # download dependencies
 $ docker-compose build  # local set up
-$ docker-compose up -d  # start the app 
+$ docker-compose up -d  # start the app
 ```
 
 Visit `http://localhost:85` in your browser. The app should be up & running.
 
-## Quick Start
-
-> UNZIP the sources or clone the private repository. After getting the code, open a terminal and navigate to the working directory, with product source code.
-
-```bash
-$ # Get the code
-$ git clone https://github.com/tmeralus/nba-matchups.git
-$ cd argon-dashboard-flask
-$
-$ # Virtualenv modules installation (Unix based systems)
-$ virtualenv env
-$ source env/bin/activate
-$
-$ # Virtualenv modules installation (Windows based systems)
-$ # virtualenv env
-$ # .\env\Scripts\activate
-$
-$ # Install modules - SQLite Database
-$ # pip3 install -r requirements.txt
-$
-$ # OR with PostgreSQL connector
-$ pip3 install -r requirements-pgsql.txt
-$
-$ # Set the FLASK_APP environment variable
-$ (Unix/Mac) export FLASK_APP=run.py
-$ # (Windows) set FLASK_APP=run.py
-$ # (Powershell) $env:FLASK_APP = ".\run.py"
-$
-$ # Set up the DEBUG environment
-$ (Unix/Mac) export FLASK_ENV=development
-$ # (Windows) set FLASK_ENV=development
-$ # (Powershell) $env:FLASK_ENV = "development"
-$
-$ # Start the application (development mode)
-$ # --host=0.0.0.0 - expose the app on all network interfaces (default 127.0.0.1)
-$ # --port=5000    - specify the app port (default 5000)  
-$ flask run --host=0.0.0.0 --port=5000
-$
-$ # Access the dashboard in browser: http://127.0.0.1:5000/
-```
-
-> Note: To use the app, please access the registration page and create a new user. After authentication, the app will unlock the private pages.
-
-
-## File Structure
-Within the download you'll find the following directories and files:
-
-```bash
-< PROJECT ROOT >
-   |
-   |-- apps/
-   |    |
-   |    |-- home/                          # A simple app that serve HTML files
-   |    |    |-- routes.py                 # Define app routes
-   |    |
-   |    |-- authentication/                # Handles auth routes (login and register)
-   |    |    |-- routes.py                 # Define authentication routes  
-   |    |    |-- models.py                 # Defines models  
-   |    |    |-- forms.py                  # Define auth forms (login and register) 
-   |    |
-   |    |-- static/
-   |    |    |-- <css, JS, images>         # CSS files, Javascripts files
-   |    |
-   |    |-- templates/                     # Templates used to render pages
-   |    |    |-- includes/                 # HTML chunks and components
-   |    |    |    |-- navigation.html      # Top menu component
-   |    |    |    |-- sidebar.html         # Sidebar component
-   |    |    |    |-- footer.html          # App Footer
-   |    |    |    |-- scripts.html         # Scripts common to all pages
-   |    |    |
-   |    |    |-- layouts/                   # Master pages
-   |    |    |    |-- base-fullscreen.html  # Used by Authentication pages
-   |    |    |    |-- base.html             # Used by common pages
-   |    |    |
-   |    |    |-- accounts/                  # Authentication pages
-   |    |    |    |-- login.html            # Login page
-   |    |    |    |-- register.html         # Register page
-   |    |    |
-   |    |    |-- home/                      # UI Kit Pages
-   |    |         |-- index.html            # Index page
-   |    |         |-- 404-page.html         # 404 page
-   |    |         |-- *.html                # All other pages
-   |    |    
-   |  config.py                             # Set up the app
-   |    __init__.py                         # Initialize the app
-   |
-   |-- requirements.txt                     # Development modules - SQLite storage
-   |-- requirements-mysql.txt               # Production modules  - Mysql DMBS
-   |-- requirements-pqsql.txt               # Production modules  - PostgreSql DMBS
-   |
-   |-- Dockerfile                           # Deployment
-   |-- docker-compose.yml                   # Deployment
-   |-- gunicorn-cfg.py                      # Deployment   
-   |-- nginx                                # Deployment
-   |    |-- Tedley-app.conf                # Deployment 
-   |
-   |-- .env                                 # Inject Configuration via Environment
-   |-- run.py                               # Start the app - WSGI gateway
-   |
-   |-- ************************************************************************
-```
- ---
-
-##### Reporting Issues
-
-I use GitHub Issues as the official bug tracker for the **NBA Matchups Dashboard**. Here are some advice for users that want to report an issue:
-
-1. Make sure that you are using the latest version of the **NBA Matchups Dashboard**. Check the Version number from your dashboard in the footer.
-2. Please provide reproducible steps for the issue to help shorten the time it takes for it to be fixed.
-3. Some issues may be browser-specific, so specifying in what browser you encountered the issue might help.
-4. Sumbit through github Issues
- 
-- Issues: [Github Issues Page](https://github.com/tmeralus/nba-matchups/issues)
-
 ---
- 
-#### Browser Support
 
-At present, we officially aim to support the last two versions of the following browsers:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+## Available Scripts
 
-#### Credits 
-Theme originally developed by [Creative Tim](https://www.creative-tim.com/product/argon-dashboard-flask) 
+In the project directory, you can run:
 
-You can click here to find the [Free Argon Dashboard Flask](https://github.com/creativetimofficial/argon-dashboard-flask)
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
