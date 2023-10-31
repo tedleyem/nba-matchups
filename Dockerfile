@@ -1,14 +1,18 @@
-FROM python:3.9
+# Fetching the latest node image on apline linux
+FROM node:alpine AS builder
 
+# Declaring env
+ENV NODE_ENV production
+
+# Setting up the work directory
+WORKDIR /app
+
+# Installing dependencies
+COPY ./package.json ./
+RUN npm install
+
+# Copying all the files in our project
 COPY . .
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# install python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-
-# gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "--reload", "run:app"]
+# Building our application
+RUN npm run build
